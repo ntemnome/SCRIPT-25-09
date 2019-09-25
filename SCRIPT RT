@@ -1,0 +1,24 @@
+enable
+clock set 19:52:00 25 september 2019
+configure terminal
+clock timezone GMT -3
+show clock 
+hostname RT-01
+banner motd "ACESSO PERMITIDO PARA PESSOAS AUTORIZADAS
+username kauealcaraz privilege 15 secret kaue123
+username leonardo privilege 15 secret leo123
+username pedrohenrique privilege 15 secret pedro123
+username rickelme privilege 15 secret rickelme123
+login block-for 60 attemps 4 within  60
+security password min-lenght 8 
+crypto key generate rsa general-key modulus 1024
+line vty 0 15
+transport input ssh
+login local
+exec-timeout 9
+service password-encryption
+interface g0/0
+ip address 192.168.7.1 255.255.255.0
+description REDE 192.168.7.0
+no shutdown 
+do wr
